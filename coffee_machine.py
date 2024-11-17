@@ -70,12 +70,13 @@ import qrcode_terminal
 class Config:
     """Kelas konfigurasi untuk menyimpan pengaturan program."""
 
-    SHEET_ID = "1aIdU_E6X5ZI0xcS6caC1SfajpIycn97aed0or6YxxXM"
+    SHEET_ID = "google_sheet_id"
     SERVICE_ACCOUNT_FILE = os.path.join(
         os.getcwd(),
-        "coffee-machine-ct24-ab01b40294eb.json",
+        "path_to_key_file",
+        "key_file.json",
     )
-    KODE_ADMIN = 9192631770
+    KODE_ADMIN = 1234567890
     TIMEOUT_DURATION = 60  # Durasi timeout input dalam detik
 
 
