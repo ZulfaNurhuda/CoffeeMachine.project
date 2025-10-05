@@ -13,6 +13,7 @@ Welcome to our Virtual Coffee Machine Simulation! This awesome project is your m
 - **⚙️・<a href="#setup-database" style="text-decoration: none;">Setup Google Sheets Database</a>**
 - **🗺️・<a href="#how-to-use" style="text-decoration: none;">How to Use</a>**
 - **🚀・<a href="#features" style="text-decoration: none;">Amazing Features</a>**
+- **🆕・<a href="#new" style="text-decoration: none;">What’s New in Term 2 (Improvements)</a>**
 - **📊・<a href="#computational-thinking" style="text-decoration: none;">Computational Thinking Applied</a>**
 - **💖・<a href="#contributing" style="text-decoration: none;">Contributing</a>**
 - **📜・<a href="#license" style="text-decoration: none;">License</a>**
@@ -114,8 +115,10 @@ Our spreadsheet contains these essential sheets:
 Edit your `.env` file:
 
 ```env
-SERVICE_ACCOUNT_FILE=your_service_account_credentials_file.json
-SHEET_ID=your_sheet_id
+# Path/file name of your service account json inside src/credentials
+FILE_AKUN_LAYANAN=credentials.json
+# Google Spreadsheet ID (string between /d/ and /edit)
+ID_SHEET=your_sheet_id
 ```
 
 ---
@@ -124,9 +127,11 @@ SHEET_ID=your_sheet_id
 
 Once everything is set up, you're just one command away from brewing virtual coffee!
 
+You can run from the repository root or from `src`:
+
 ```bash
 cd src
-python coffee_machine.py
+python main.py
 ```
 
 Then follow the interactive menu to:
@@ -134,8 +139,13 @@ Then follow the interactive menu to:
 2. **Place Orders**: Select coffee, customize composition, choose quantity  
 3. **Pick Temperature**: Hot or cold - your choice!
 4. **Make Payment**: Choose between cash or QRIS payment
-5. **QR Confirmation**: For online orders, scan QR code for confirmation
-6. **Admin Access**: Use admin code for restocking and system management
+5. **QR Confirmation (Web)**: For QRIS, scan the ASCII QR shown to open the local page and confirm payment
+6. **Scan Online Order**: Use menu "Scan QR" to process website orders from the sheet queue
+7. **Admin Access**: Use admin code for restocking and system management
+
+Notes:
+- The app starts a local web service in the background at `http://0.0.0.0:5000` for QR confirmation pages.
+- Input prompts time out after 60s and return to the main menu automatically.
 
 ---
 
@@ -149,12 +159,23 @@ Our coffee machine simulation is packed with incredible features:
 - **🌡️ Temperature Selection**: Choose between hot and cold beverages
 - **🧂 Custom Composition**: Adjust sugar, milk, creamer, chocolate
 - **💳 Dual Payment System**: Cash and QRIS payment methods
-- **📱 QR Code Integration**: Online order confirmation via QR
+- **📱 QR Code Integration**: QRIS checkout with ASCII QR and local confirmation page
 - **📊 Detailed Order Recording**: Comprehensive transaction logging
 - **🛡️ Error Handling**: Robust error management system
 - **ℹ️ User-Friendly Interface**: Clear information at every step
 - **✅ Input Validation**: Comprehensive user input validation
 - **🔐 Admin Panel**: Secure admin menu with authentication
+
+### <div id="new">**🆕・What's New in Term 2 (Improvements)**</div>
+
+- **Modular Architecture**: Clean separation into `apps/` packages (menu, orders, payments, admin, DB, webservice, utils).
+- **Background Web Service**: Flask server runs alongside CLI for QR confirmations (`/search`, `/proses_cari`, `/berhasil`, `/gagal`).
+- **QRIS Flow Upgrade**: ASCII QR encodes a local URL; visiting the page updates status to "Selesai" automatically.
+- **📱 Online Order Scanner (Webcam QR Scanning)**: Revolutionary new "Scan QR" menu feature that uses your webcam with OpenCV to scan QR codes from online orders! Process orders from the `AntrianPesananQR` queue automatically, intelligently handles partial inventory fills, and updates Google Sheets in real-time. Perfect for bridging online orders to your physical coffee machine! 🎥✨
+- **Input Timeout UX**: Prompts auto-cancel after 60s and return to main menu.
+- **Bestseller Highlight**: Menu marks most sold coffee (★) derived from `DataPenjualan`.
+- **Queued + Periodic Sync**: Batched cache updates to Sheets in the background, with safe synchronous paths for admin restock and admin code persistence (`credentials/admin_code.txt`).
+- **Graceful Shutdown**: CTRL+C triggers a final sync to persist pending updates.
 
 ---
 

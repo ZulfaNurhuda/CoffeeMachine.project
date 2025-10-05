@@ -1,0 +1,117 @@
+<!--
+This HTML file defines the payment success page for the web service.
+It is displayed when a QR code payment is successfully processed and confirmed.
+
+The page includes:
+- A clear "Payment Success!" message.
+- A success icon (a green checkmark) to provide immediate positive visual feedback.
+- The total amount of the transaction, formatted as currency using a Jinja2 filter.
+- Detailed transaction information, including the reference number, payment time, and payment method,
+  which are passed from the Flask application.
+- A clean, centered layout that is consistent with the other payment-related pages.
+-->
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <title>Payment Success</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            /* Import Google Fonts */
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+            /* Body styling */
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: "Poppins", sans-serif;
+                background-color: #f5f5f5;
+            }
+
+            /* Main container for the content */
+            .container {
+                background-color: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                text-align: center;
+                width: 300px;
+            }
+
+            /* Styling for the success icon container */
+            .success-icon {
+                background-color: #e0f7e9;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto 20px;
+            }
+
+            /* Icon color */
+            .success-icon i {
+                color: #34a853;
+                font-size: 24px;
+            }
+
+            /* Amount styling */
+            .amount {
+                font-size: 28px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            /* Horizontal rule for separation */
+            hr {
+                border: none;
+                border-top: 1px solid #e0e0e0;
+                margin: 20px 0;
+            }
+
+            /* Details section styling */
+            .details {
+                text-align: left;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+
+            .details div {
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .details div span {
+                color: #888888;
+            }
+        </style>
+        <!-- Link to Font Awesome for icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <!-- Success Icon -->
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <!-- Success Message -->
+            <div>Payment Success!</div>
+            <!-- Transaction Amount -->
+            <div class="amount">IDR {{ data.total_harga|rupiah }}</div>
+            <hr />
+            <!-- Transaction Details -->
+            <div class="details">
+                <div><span>Ref Number</span>{{ ref_id }}</div>
+                <div><span>Payment Time</span>{{ data.timestamp }}</div>
+                <div><span>Payment Method</span>{{ data.metode_pembayaran }}</div>
+            </div>
+        </div>
+    </body>
+</html>

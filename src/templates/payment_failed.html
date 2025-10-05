@@ -1,0 +1,117 @@
+<!--
+This HTML file defines the payment failure page for the web service.
+It is displayed when a QR code payment cannot be successfully processed, either because
+the reference ID is invalid, the payment has expired, or it has already been completed.
+
+The page includes:
+- A clear "Payment Failed!" message.
+- A failure icon (a red 'X') to provide immediate visual feedback.
+- A message in Indonesian explaining that the Ref ID is invalid or has expired.
+- A note advising the user to contact the development team if they believe it's an error.
+- A clean, centered layout consistent with the other pages.
+-->
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <title>Payment Failed</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            /* Import Google Fonts */
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+            /* Body styling */
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: "Poppins", sans-serif;
+                background-color: #f5f5f5;
+            }
+
+            /* Main container for the content */
+            .container {
+                background-color: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                text-align: center;
+                width: 300px;
+            }
+
+            /* Styling for the failure icon container */
+            .failed-icon {
+                background-color: #fdecea;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto 20px;
+            }
+
+            /* Icon color */
+            .failed-icon i {
+                color: #d93025;
+                font-size: 24px;
+            }
+
+            /* Main failure message */
+            .message {
+                font-size: 24px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            /* Horizontal rule for separation */
+            hr {
+                border: none;
+                border-top: 1px solid #e0e0e0;
+                margin: 20px 0;
+            }
+
+            /* Details section */
+            .details {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 14px;
+            }
+
+            .details div {
+                margin: 5px 0;
+            }
+
+            /* Note text styling */
+            .note {
+                color: #888888;
+                font-size: 12px;
+                margin-top: 10px;
+            }
+        </style>
+        <!-- Link to Font Awesome for icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="container">
+            <!-- Failure Icon -->
+            <div class="failed-icon">
+                <i class="fas fa-times"></i>
+            </div>
+            <!-- Failure Message -->
+            <div class="message">Payment Failed!</div>
+            <hr />
+            <!-- Details of the failure -->
+            <div class="details">
+                <div>Ref ID Tidak Valid atau Sudah Kadaluarsa</div>
+                <div class="note">
+                    Note: Apabila ini adalah kesalahan, hubungi tim pengembang
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
